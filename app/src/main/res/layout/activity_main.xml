@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TabHost xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@android:id/tabhost"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TabWidget
+            android:id="@android:id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true" />
+
+        <FrameLayout
+            android:id="@android:id/tabcontent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@android:id/tabs">
+
+            <!-- 달력 탭 -->
+            <RelativeLayout
+                android:id="@+id/tabCalendar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_calendar">
+
+                <ImageView
+                    android:id="@+id/calendar_icon"
+                    android:src="@drawable/calendar_icon"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="16dp"
+                    android:contentDescription="달력 아이콘" />
+
+                <CalendarView
+                    android:id="@+id/calendarView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/calendar_icon"
+                    android:layout_marginTop="16dp" />
+            </RelativeLayout>
+
+            <!-- 일정 목록 탭 -->
+            <RelativeLayout
+                android:id="@+id/tabList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="16dp"
+                android:background="@drawable/bg_calendar">
+
+                <TextView
+                    android:id="@+id/textViewGuide"
+                    android:text="※ 일정 항목을 길게 누르면 삭제할 수 있어요."
+                    android:textSize="12sp"
+                    android:textColor="#888888"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginBottom="8dp" />
+
+                <ListView
+                    android:id="@+id/listViewSchedules"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/textViewGuide" />
+            </RelativeLayout>
+        </FrameLayout>
+    </RelativeLayout>
+</TabHost>
