@@ -37,13 +37,35 @@
                     android:layout_marginTop="16dp"
                     android:contentDescription="달력 아이콘" />
 
+                <!-- 설명 텍스트 -->
+                <TextView
+                    android:id="@+id/textViewIconGuide"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/calendar_icon"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="8dp"
+                    android:text="※ 아이콘을 누르면 배경을 변경할 수 있습니다"
+                    android:textColor="#888888"
+                    android:textSize="12sp" />
+
                 <CalendarView
                     android:id="@+id/calendarView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/calendar_icon"
+                    android:layout_below="@id/textViewIconGuide"
                     android:layout_marginTop="16dp" />
+
+                <Button
+                    android:id="@+id/btnBackToStart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="시작화면으로"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="20dp" />
             </RelativeLayout>
+
 
             <!-- 일정 목록 탭 -->
             <RelativeLayout
@@ -55,7 +77,7 @@
 
                 <TextView
                     android:id="@+id/textViewGuide"
-                    android:text="※ 일정 항목을 길게 누르면 삭제할 수 있어요."
+                    android:text="※ 일정 항목을 길게 누르면 삭제할 수 있습니다."
                     android:textSize="12sp"
                     android:textColor="#888888"
                     android:layout_width="match_parent"
@@ -67,7 +89,8 @@
                     android:id="@+id/listViewSchedules"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_below="@id/textViewGuide" />
+                    android:layout_below="@id/textViewGuide"
+                    android:layout_marginTop="8dp" />
             </RelativeLayout>
         </FrameLayout>
     </RelativeLayout>

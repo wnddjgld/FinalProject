@@ -1,9 +1,11 @@
 package kr.ac.kopo.finalproject;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -18,9 +20,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map;
-import java.util.TreeMap;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,9 +32,10 @@ public class MainActivity extends AppCompatActivity {
     private RelativeLayout tabCalendar;
     private RelativeLayout tabList;
     private TextView textViewGuide;
+    private Button btnBackToStart;
 
     private long selectedDate;
-    private final Map<Long, ArrayList<String>> scheduleMap = new TreeMap<>();
+    private final HashMap<Long, ArrayList<String>> scheduleMap = new HashMap<>();
     private final ArrayList<String> scheduleDisplayList = new ArrayList<>();
     private ArrayAdapter<String> scheduleAdapter;
 
@@ -61,7 +63,9 @@ public class MainActivity extends AppCompatActivity {
         tabCalendar = findViewById(R.id.tabCalendar);
         tabList = findViewById(R.id.tabList);
         textViewGuide = findViewById(R.id.textViewGuide);
+        btnBackToStart = findViewById(R.id.btnBackToStart);
 
+        // 배경 적용
         tabCalendar.setBackgroundResource(selectedBgResId);
         tabList.setBackgroundResource(selectedBgResId);
 
@@ -86,7 +90,15 @@ public class MainActivity extends AppCompatActivity {
             return true;
         });
 
-        calendarIcon.setOnClickListener(v -> showBackgroundSelectDialog());
+        calendarIcon.setOnClickListener(v -> {
+            Toast.makeText(MainActivity.this, "배경을 선택할 수 있어요!", Toast.LENGTH_SHORT).show();
+            showBackgroundSelectDialog();
+        });
+
+        btnBackToStart.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, StartActivity.class);
+            startActivity(intent);
+        });
     }
 
     private long getMillisFromDate(int year, int month, int day) {
@@ -128,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void removeSchedule(String displayText) {
         for (Long date : scheduleMap.keySet()) {
-            String datePrefix = formatDate(date) + " - ";
+            String datePrefix = "\uD83D\uDCC5 " + formatDate(date) + " - ";
             if (displayText.startsWith(datePrefix)) {
                 String content = displayText.replace(datePrefix, "");
                 scheduleMap.get(date).remove(content);
@@ -145,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
         scheduleDisplayList.clear();
         for (Long date : scheduleMap.keySet()) {
             for (String s : scheduleMap.get(date)) {
-                scheduleDisplayList.add(formatDate(date) + " - " + s);
+                scheduleDisplayList.add("\uD83D\uDCC5 " + formatDate(date) + " - " + s);
             }
         }
         scheduleAdapter.notifyDataSetChanged();
@@ -157,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showBackgroundSelectDialog() {
-        final String[] options = {"기본 배경", "노을 배경", "ETC 배경"};
+        final String[] options = {"기본 배경", "노을 배경", "밤하늘 배경"};
         final int[] bgResIds = {R.drawable.bg_calendar, R.drawable.bg_sunset, R.drawable.bg_night};
 
         new AlertDialog.Builder(this)
